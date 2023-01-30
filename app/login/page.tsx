@@ -1,18 +1,21 @@
 
 import { EnvelopeIcon } from '@heroicons/react/24/outline'
+import Link from 'next/link'
 
 
 export default function Home() {
   return (
     <>
-      <img src="/login_bg.jpg" alt="BG"></img>
+      <img className="w-full h-2/5 object-cover" src="/login_bg.jpg" alt="BG"></img>
       <div className="rounded-t-2xl w-full -mt-5 relative bg-white pt-6 px-5">
         <h1 className="text-3xl font-bold text-gray-900">Welcome</h1>
         <h3 className="text-xl text-gray-500 antialiased my-2">Sign in with Email or Socials</h3>
         <div className="mt-5">
           
         </div>
-        <button className="w-full my-3 p-2 rounded-md shadow-md bg-teal-800 outline-teal-600 outline-2 outline-offset-2 active:outline text-white text-sm cursor-pointer">Sign In</button>
+        <Link href="/dashboard" passHref>
+          <button className="w-full my-3 p-2 rounded-md shadow-md bg-teal-800 outline-teal-600 outline-2 outline-offset-2 active:outline text-white text-sm cursor-pointer">Sign In</button>
+        </Link>
         <div className="flex justify-center mt-5">
           <div>
             <p className="text-sm text-gray-700 antialiased">Or continue with</p>

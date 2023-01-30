@@ -1,6 +1,9 @@
+"use client"
+
 import './globals.css'
 
 import { Inter } from '@next/font/google';
+import { RealViewportProvider } from 'next-real-viewport';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -20,7 +23,15 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>{children}</body>
+      <body>
+        <RealViewportProvider>
+          <div className="bg-slate-50 w-full h-screen-fixed">
+            <div className="max-w-3xl h-full mx-auto shadow-md bg-white">
+              {children}
+            </div>
+          </div>
+        </RealViewportProvider>
+      </body>
     </html>
   )
 }

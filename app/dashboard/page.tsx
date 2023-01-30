@@ -21,29 +21,24 @@ export default function Home() {
 
   return (
     <>
-      <div className="bg-slate-50 w-full">
-        <div className="max-w-3xl mx-auto shadow-md bg-white">
-
-          <main className="flex flex-col h-screen">
-            <header className="px-5">
-              <div className="pt-6 pb-5 flex items-center justify-between">
-                <div className="flex items-center">
-                  <MagnifyingGlassIcon className="w-5 mx-2" />
-                  <h2 className="text-lg font-bold">Restaurants</h2>
-                </div>
-                <PlaceSelect />
-              </div>
-              <TextInput onChange={setSearchText} name="search" placeholder="Search..." icon={MagnifyingGlassIcon} showLabel={false} />
-            </header>
-
-            <div className="mt-6 px-5 flex-1 overflow-scroll">
-              <RestaurantList searchString={searchText} filterFavourites={tabIndex == 1} filterAlerts={tabIndex == 2} />
+      <main className="flex flex-col h-screen-fixed">
+        <header className="px-5">
+          <div className="pt-6 pb-5 flex items-center justify-between">
+            <div className="flex items-center">
+              <MagnifyingGlassIcon className="w-5 mx-2" />
+              <h2 className="text-lg font-bold">Restaurants</h2>
             </div>
+            <PlaceSelect />
+          </div>
+          <TextInput onChange={setSearchText} name="search" placeholder="Search..." icon={MagnifyingGlassIcon} showLabel={false} />
+        </header>
 
-            <TabBar index={tabIndex} onChange={setTabIndex}/>
-          </main>
+        <div className="mt-6 px-5 flex-1 overflow-scroll">
+          <RestaurantList searchString={searchText} filterFavourites={tabIndex == 1} filterAlerts={tabIndex == 2} />
         </div>
-      </div>
+
+        <TabBar index={tabIndex} onChange={setTabIndex} />
+      </main>
 
     </>
   )

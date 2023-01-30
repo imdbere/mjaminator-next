@@ -14,7 +14,7 @@ export default function Example() {
   return (
     <div className="">
       <Listbox value={selected} onChange={setSelected}>
-        <div className="relative mt-1 w-64">
+        <div className="relative mt-1">
           <div className="absolute inset-y-0 flex items-center pl-2 z-10">
             <MapPinIcon className="h-5 w-5 text-gray-700" />
           </div>
