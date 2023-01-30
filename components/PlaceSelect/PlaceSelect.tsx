@@ -12,7 +12,7 @@ export default function Example() {
   const [selected, setSelected] = useState(people[0])
 
   return (
-    <div className="">
+    <div className="shrink min-w-0 ml-3">
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1">
           <div className="absolute inset-y-0 flex items-center pl-2 z-10">
