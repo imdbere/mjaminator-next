@@ -8,7 +8,10 @@ import {
 import clsx from 'clsx'
 import { MouseEvent, useState } from 'react'
 
-export default function TabBar() {
+export default function TabBar(
+  {index = 0, onChange} :
+  {index: number, onChange: (i: number) => any}
+) {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const menu = [
@@ -31,8 +34,8 @@ export default function TabBar() {
 
   const onClick = (e: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>, index: number) => {
     e.preventDefault();
-    console.log("Selected index " + index);
     setSelectedIndex(index);
+    onChange?.(index);
   }
 
   return (

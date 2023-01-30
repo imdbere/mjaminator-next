@@ -17,7 +17,7 @@ import { useState } from 'react'
 
 export default function Home() {
   const [searchText, setSearchText] = useState("");
-  const selectedIndex = 1;
+  const [tabIndex, setTabIndex] = useState(0);
 
   return (
     <>
@@ -37,10 +37,10 @@ export default function Home() {
             </header>
 
             <div className="mt-6 px-5 flex-1 overflow-scroll">
-              <RestaurantList searchString={searchText} />
+              <RestaurantList searchString={searchText} filterFavourites={tabIndex == 1} filterAlerts={tabIndex == 2} />
             </div>
 
-            <TabBar />
+            <TabBar index={tabIndex} onChange={setTabIndex}/>
           </main>
         </div>
       </div>

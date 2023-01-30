@@ -1,3 +1,4 @@
+import Fuse from "fuse.js";
 import { useState } from "react";
 import { useImmer } from "use-immer";
 import RestaurantCard from "../RestaurantCard/RestaurantCard";
@@ -55,13 +56,12 @@ const defaultRestaurants = [
 ];
 
 export default function RestaurantList(
-  {searchString} :
-  {searchString?: string}
+  {searchString, filterFavourites = false, filterAlerts = false} :
+  {searchString?: string, filterFavourites: boolean, filterAlerts: boolean}
 ) {
   const [restaurants, setRestaurants] = useImmer(defaultRestaurants);
-  const filteredRestaurants = searchString ?
-    restaurants.filter(r => r.name.includes(searchString)) :
-    restaurants;
+
+  let filteredRestaurants = getFilteredRestaurants(restaurants, searchString, filterFavourites);
 
   const favouriteRestaurant = (id: number, favourite: boolean) => {
     setRestaurants(a => {
@@ -72,7 +72,7 @@ export default function RestaurantList(
   }
 
   return (
-    <ul className="divide-y divide-gray-200">
+    <ul className="divide-y divide-gray-300">
       {
         filteredRestaurants.map((r, i) => (
           <li key={r.id} className="py-4">
@@ -84,4 +84,24 @@ export default function RestaurantList(
       }
     </ul>
   )
+}
+
+function getFilteredRestaurants(restaurants: { id: number; name: string; availability: boolean; favourite: boolean; time: string; }[], searchString: string | undefined, filterFavourites: boolean) {
+  let filteredRestaurants = restaurants;
+  if (searchString) {
+    const options = {
+      //includeScore: true,
+      keys: ['name']
+    }
+
+    const fuse = new Fuse(filteredRestaurants, options)
+    const result = fuse.search(searchString)
+  
+    filteredRestaurants = result.map(r => r.item);
+    //filteredRestaurants = filteredRestaurants.filter(r => r.name.includes(searchString));
+  }
+  if (filterFavourites) {
+    filteredRestaurants = filteredRestaurants.filter(r => r.favourite);
+  }
+  return filteredRestaurants;
 }
