@@ -1,61 +1,50 @@
-import Image from 'next/image'
-import { Epilogue, Sarabun } from '@next/font/google'
-import styles from './page.module.css'
-import Button from '@/components/Button/Button'
-import TextInput from '@/components/TextInput/TextInput'
-import { Search, Heart } from 'lucide-react'
+"use client"
 
-const epilogue = Epilogue({ subsets: ['latin'] })
-const sarabun = Sarabun({ subsets: ['latin'], weight: "300" })
+import PlaceSelect from '@/components/PlaceSelect/PlaceSelect'
+import RestaurantCard from '@/components/RestaurantCard/RestaurantCard'
+import RestaurantList from '@/components/RestaurantList/RestaurantList'
+import TabBar from '@/components/TabBar/TabBar'
+import TextInput from '@/components/TextInput/TextInput'
+import { MagnifyingGlassIcon, HeartIcon, BellIcon } from '@heroicons/react/24/outline'
+import {
+  MagnifyingGlassIcon as MagnifyingGlassIconSolid,
+  HeartIcon as HeartIconSolid,
+  BellIcon as BellIconSolid
+} from '@heroicons/react/24/solid'
+import clsx from 'clsx'
+import { useState } from 'react'
+
 
 export default function Home() {
-	return (
-		<>
-			<main>
-				<div className={styles.scroll}>
-					<div className={styles.header}>
-						<div className={styles.headerTop}>
-							<div className={styles.headerSearch}>
-								<Search size={24} />
-								<h4 className={epilogue.className}>Restaurants</h4>
-							</div>
-							<select className={styles.dropdown} name="place" id="place">
-								<option value="eng">Engerthstraße 108</option>
-							</select>
-						</div>
+  const [searchText, setSearchText] = useState("");
+  const selectedIndex = 1;
 
-						<TextInput name="Search" showText={false}></TextInput>
-					</div>
-					<div className={styles.content}>
-						{[1, 2, 3, 4, 5].map(a => <div className={styles.results}>
-							<div className={styles.card}>
-								<img className={styles.cardImg} src="/next.svg" alt="" />
-								<div className={styles.cardContent}>
-									<div className={styles.line}>
-										<p className={epilogue.className}>Le Burger</p>
-										<Heart />
-									</div>
-									<div className={styles.line}>
-										<p className={epilogue.className}>Currently unavailable</p>
-										<Button>Notify</Button>
-									</div>
-								</div>
-							</div>
-						</div>)}
-						<Button className={styles.moreBtn}>See more</Button>
-					</div>
-				</div>
-				<div className={styles.footer}>
-					<div className={styles.footerItem}>
-						<Search />
-						<p className={epilogue.className}>Search</p>
-					</div>
-					<div className={styles.footerItem}>
-						<Search />
-						<p className={epilogue.className}>Search</p>
-					</div>
-				</div>
-			</main>
-		</>
-	)
+  return (
+    <>
+      <div className="bg-slate-50 w-full">
+        <div className="max-w-3xl mx-auto shadow-md bg-white">
+
+          <main className="flex flex-col h-screen">
+            <header className="px-5">
+              <div className="pt-6 pb-5 flex items-center justify-between">
+                <div className="flex items-center">
+                  <MagnifyingGlassIcon className="w-5 mx-2" />
+                  <h2 className="text-lg font-bold">Restaurants</h2>
+                </div>
+                <PlaceSelect />
+              </div>
+              <TextInput onChange={setSearchText} name="search" placeholder="Search..." icon={MagnifyingGlassIcon} showLabel={false} />
+            </header>
+
+            <div className="mt-6 px-5 flex-1 overflow-scroll">
+              <RestaurantList searchString={searchText} />
+            </div>
+
+            <TabBar />
+          </main>
+        </div>
+      </div>
+
+    </>
+  )
 }
