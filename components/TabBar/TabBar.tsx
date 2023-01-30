@@ -6,7 +6,7 @@ import {
   HeartIcon as HeartIconSolid, 
   BellIcon as BellIconSolid} from '@heroicons/react/24/solid'
 import clsx from 'clsx'
-import { useState } from 'react'
+import { MouseEvent, useState } from 'react'
 
 export default function TabBar() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -29,7 +29,7 @@ export default function TabBar() {
     }
   ]
 
-  const onClick = (e: MouseEvent, index: number) => {
+  const onClick = (e: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>, index: number) => {
     e.preventDefault();
     console.log("Selected index " + index);
     setSelectedIndex(index);

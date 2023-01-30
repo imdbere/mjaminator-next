@@ -56,8 +56,8 @@ export default function RestaurantList(
   return (
     <ul className="divide-y divide-gray-200">
       {
-        filteredRestaurants.map(r => (
-          <li className="py-4">
+        filteredRestaurants.map((r, i) => (
+          <li key={i} className="py-4">
             <RestaurantCard name={r.name} available={r.availability} favourite={r.favourite} timeToDelivery={r.time} />
           </li>
         ))
